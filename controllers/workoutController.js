@@ -45,6 +45,7 @@ const delete_workout = async (req, res) => {
     if (!workout) {
         return res.status(404).json('No such workout');
     }
+    res.setHeader('Access-Control-Allow-Origin', '*'); //CORS
     res.status(200).json(workout);
 }
 

@@ -7,7 +7,7 @@ const router = express.Router();
 // handle CORS
 router.options('/*',(req,res)=>{
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.send();
 })
