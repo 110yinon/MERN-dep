@@ -3,12 +3,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const workoutRoutes = require('./routes/workoutsRoutes');
+const path = require('path');
 
 // express app
 const app = express();
 
 // middleware
 app.use(express.json());
+app.use(express.static('build'));
 app.use(morgan('dev'));
 
 // connect to db
@@ -28,6 +30,6 @@ mongoose.connect(process.env.MONGO_URI)
 // routes
 app.use('/api/workouts', workoutRoutes);
 
-app.get('/', (req, res) => {
-    res.json({ msg: 'hello kuni' });
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
