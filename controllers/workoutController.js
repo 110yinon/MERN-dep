@@ -23,6 +23,15 @@ const getWorkout = async (req, res) => {
 
 // create a new workout
 const create_workout = async (req, res) => {
+    const { title, load, reps } = req.body;
+    const emptyFields = [];
+    if (!title) { emptyFields.push('title'); }
+    if (!load) { emptyFields.push('load'); }
+    if (!reps) { emptyFields.push('reps'); }
+    if (emptyFields.length > 0) {
+        res.setHeader('Access-Control-Allow-Origin', '*'); //CORS
+        return res.status(400).json({message:`please fill the fields: ${emptyFields}`});
+    }
     try {
         const workout = await workoutModel.create(req.body);
         res.setHeader('Access-Control-Allow-Origin', '*'); //CORS
